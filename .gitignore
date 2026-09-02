@@ -1,0 +1,4 @@
+/.rayleabot/
+/dist/
+/go.work
+*.log

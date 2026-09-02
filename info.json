@@ -1,0 +1,61 @@
+{
+  "id": "raylea.oil-price",
+  "name": "油价查询",
+  "version": "0.1.0",
+  "manifest_version": "3",
+  "license": "MIT",
+  "min_core_version": "0.4.0",
+  "metadata": {
+    "description": "查询省级当前参考油价和城市大型品牌加油站",
+    "author": "raylea",
+    "repo": "https://github.com/RayleaBot/plugin-oil-price",
+    "keywords": ["oil-price", "gas-station", "amap", "juhe"]
+  },
+  "concurrency": 4,
+  "events": ["message.group", "message.private"],
+  "permissions": {
+    "message.send": true,
+    "secret.read": true
+  },
+  "default_config": {
+    "default_area": "北京",
+    "station_limit": 5,
+    "price_cache_minutes": 60,
+    "station_cache_minutes": 720
+  },
+  "commands": [
+    {
+      "id": "oil-price",
+      "name": "油价",
+      "description": "查询地区参考油价和大型品牌加油站",
+      "usage": "/油价 [地区] [92|95|98|0] [品牌]",
+      "permission": "everyone",
+      "trigger": {
+        "type": "exact",
+        "names": ["油价"]
+      }
+    },
+    {
+      "id": "gas-stations",
+      "name": "油站",
+      "description": "查询地区内的大型品牌加油站",
+      "usage": "/油站 [地区] [品牌]",
+      "permission": "everyone",
+      "trigger": {
+        "type": "exact",
+        "names": ["油站"]
+      }
+    }
+  ],
+  "command_groups": [
+    {
+      "id": "oil-services",
+      "title": "油价与加油站",
+      "commands": ["oil-price", "gas-stations"]
+    }
+  ],
+  "help": {
+    "title": "油价查询",
+    "summary": "查询省级参考油价，并展示中石油、中石化等城市加油站"
+  }
+}
