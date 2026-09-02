@@ -10,7 +10,7 @@ import (
 	rayleabot "github.com/RayleaBot/RayleaBot/sdk/go"
 )
 
-const priceCacheKey = "oilprice.price.juhe.v1"
+const priceCacheKey = "oilprice.bundle.public.v2"
 
 type cacheEnvelope[T any] struct {
 	StoredAt time.Time `json:"stored_at"`

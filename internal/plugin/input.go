@@ -113,3 +113,11 @@ func normalizeRegionName(value string) string {
 	}
 	return value
 }
+
+func normalizeRegionLookup(value string) string {
+	value = normalizeText(value)
+	for _, suffix := range []string{"壮族自治区", "回族自治区", "维吾尔自治区", "特别行政区", "自治州", "自治区", "省", "市", "区", "县"} {
+		value = strings.ReplaceAll(value, suffix, "")
+	}
+	return value
+}
