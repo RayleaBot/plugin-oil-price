@@ -13,6 +13,27 @@ var gradeLabels = map[string]string{
 	"0":  "0号柴油",
 }
 
+var supportedGrades = [...]string{"92", "95", "98", "0"}
+
+func formatSupportedBrands() string {
+	var out strings.Builder
+	out.WriteString("支持查询的油号与加油站品牌\n\n油号\n")
+	for _, grade := range supportedGrades {
+		fmt.Fprintf(&out, "- %s\n", gradeLabels[grade])
+	}
+	out.WriteString("\n加油站品牌\n")
+	for _, brand := range knownBrands {
+		fmt.Fprintf(&out, "- %s", brand.Name)
+		if len(brand.Aliases) > 1 {
+			fmt.Fprintf(&out, "（别名：%s）", strings.Join(brand.Aliases[1:], " / "))
+		}
+		out.WriteByte('\n')
+	}
+	out.WriteString("\n示例：/油价 深圳 95 中石化\n")
+	out.WriteString("说明：部分价区不提供 98 号汽油；站点品牌目录来自 OpenStreetMap，覆盖可能不完整。")
+	return out.String()
+}
+
 func formatQueryResult(input queryInput, result queryResult) string {
 	var out strings.Builder
 	displayArea := strings.TrimSpace(result.Area.Requested)
@@ -26,7 +47,7 @@ func formatQueryResult(input queryInput, result queryResult) string {
 			zoneName = "默认价区"
 		}
 		fmt.Fprintf(&out, "参考价区：%s · %s\n", result.Price.Region, zoneName)
-		grades := []string{"92", "95", "98", "0"}
+		grades := supportedGrades[:]
 		if input.Grade != "" {
 			grades = []string{input.Grade}
 		}

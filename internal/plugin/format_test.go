@@ -39,3 +39,23 @@ func TestFormatQueryResultDeduplicatesWarningsAndMarksStaleData(t *testing.T) {
 		t.Fatalf("unexpected stale output:\n%s", text)
 	}
 }
+
+func TestFormatSupportedBrandsListsGradesBrandsAndExample(t *testing.T) {
+	text := formatSupportedBrands()
+	for _, want := range []string{
+		"92号汽油",
+		"95号汽油",
+		"98号汽油",
+		"0号柴油",
+		"中国石油",
+		"中国石化",
+		"中国海油",
+		"壳牌",
+		"延长石油",
+		"/油价 深圳 95 中石化",
+	} {
+		if !strings.Contains(text, want) {
+			t.Fatalf("supported brand output missing %q:\n%s", want, text)
+		}
+	}
+}

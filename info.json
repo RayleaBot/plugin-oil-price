@@ -1,7 +1,7 @@
 {
   "id": "raylea.oil-price",
   "name": "油价查询",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "manifest_version": "3",
   "license": "MIT",
   "min_core_version": "0.4.0",
@@ -45,17 +45,28 @@
         "type": "exact",
         "names": ["油站"]
       }
+    },
+    {
+      "id": "oil-brands",
+      "name": "油品牌",
+      "description": "查看支持查询的油号和加油站品牌",
+      "usage": "/油品牌",
+      "permission": "everyone",
+      "trigger": {
+        "type": "exact",
+        "names": ["油品牌"]
+      }
     }
   ],
   "command_groups": [
     {
       "id": "oil-services",
       "title": "油价与加油站",
-      "commands": ["oil-price", "gas-stations"]
+      "commands": ["oil-price", "gas-stations", "oil-brands"]
     }
   ],
   "help": {
     "title": "油价查询",
-    "summary": "免 Key 查询省市价区油价，并展示中石油、中石化等城市附近加油站"
+    "summary": "免 Key 查询省市价区油价和附近加油站，并可查看支持的油号与品牌"
   }
 }

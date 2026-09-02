@@ -14,6 +14,9 @@ func Run(ctx context.Context) error {
 
 func handleEvent(ctx context.Context, event *rayleabot.EventContext) error {
 	command := event.Event.Command()
+	if command == "油品牌" {
+		return event.SendText(formatSupportedBrands())
+	}
 	if command != "油价" && command != "油站" {
 		return event.Result(map[string]any{"handled": false})
 	}
