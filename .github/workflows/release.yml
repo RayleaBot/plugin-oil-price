@@ -92,6 +92,8 @@ jobs:
           EOF
 
       - name: Build artifact
+        env:
+          RAYLEA_PLUGIN_BUILD_USE_WORKSPACE: '1'
         run: go run github.com/RayleaBot/RayleaBot/sdk/go/cmd/raylea-plugin build-go --plugin . --backend ./cmd/oil-price --target "${{ matrix.target }}" --out dist
 
       - name: Upload platform package
