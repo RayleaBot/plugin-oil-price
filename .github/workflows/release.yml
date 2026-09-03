@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout plugin
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Checkout pinned RayleaBot SDK
         uses: actions/checkout@v4
@@ -34,9 +34,10 @@ jobs:
           path: .rayleabot/core
 
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v7
         with:
           go-version: ${{ env.GO_VERSION }}
+          cache: false
 
       - name: Link checked-out SDK
         shell: bash
@@ -64,7 +65,7 @@ jobs:
         target: [windows-x64, linux-x64, macos-arm64]
     steps:
       - name: Checkout plugin
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Checkout pinned RayleaBot SDK
         uses: actions/checkout@v4
@@ -74,9 +75,10 @@ jobs:
           path: .rayleabot/core
 
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v7
         with:
           go-version: ${{ env.GO_VERSION }}
+          cache: false
 
       - name: Link checked-out SDK
         shell: bash
@@ -97,7 +99,7 @@ jobs:
         run: go run github.com/RayleaBot/RayleaBot/sdk/go/cmd/raylea-plugin build-go --plugin . --backend ./cmd/oil-price --target "${{ matrix.target }}" --out dist
 
       - name: Upload platform package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: plugin-${{ matrix.target }}
           path: dist/*.zip
@@ -113,7 +115,7 @@ jobs:
       RELEASE_TAG: ${{ inputs.release_tag || github.ref_name }}
     steps:
       - name: Download platform packages
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: plugin-*
           path: release-assets
