@@ -1,4 +1,5 @@
 /.rayleabot/
 /dist/
 /go.work
+/go.work.sum
 *.log
